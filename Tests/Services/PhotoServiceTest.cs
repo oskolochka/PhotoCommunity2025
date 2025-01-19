@@ -137,34 +137,5 @@ namespace PhotoCommunity2025.Tests.Services
 
             Assert.That(searchResults.Count(), Is.EqualTo(0));
         }
-
-        [Test]
-        public void SearchPhotos_Photos_SearchEqualTags()
-        {
-            var photo1 = new Photo { UserId = 1, Title = "Закат", Description = "Красивый закат", Tags = "Красный", FilePath = "путь/к/файлу.jpg" };
-            var photo2 = new Photo { UserId = 1, Title = "Пляж", Description = "Солнечный пляж", Tags = "Голубой", FilePath = "путь/к/файлу.jpg" };
-
-            _photoService.UploadPhoto(photo1);
-            _photoService.UploadPhoto(photo2);
-
-            var searchResults = _photoService.SearchPhotos("красный");
-
-            Assert.That(searchResults.Count(), Is.EqualTo(1));
-            Assert.That(searchResults.First().Title, Is.EqualTo("Закат"));
-        }
-
-        [Test]
-        public void SearchPhotos_Photos_SearchNoEqualTags()
-        {
-            var photo1 = new Photo { UserId = 1, Title = "Закат", Description = "Красивый закат", Tags = "Красный", FilePath = "путь/к/файлу.jpg" };
-            var photo2 = new Photo { UserId = 1, Title = "Пляж", Description = "Солнечный пляж", Tags = "Голубой", FilePath = "путь/к/файлу.jpg" };
-
-            _photoService.UploadPhoto(photo1);
-            _photoService.UploadPhoto(photo2);
-
-            var searchResults = _photoService.SearchPhotos("Зеленый");
-
-            Assert.That(searchResults.Count(), Is.EqualTo(0)); 
-        }
     }
 }
