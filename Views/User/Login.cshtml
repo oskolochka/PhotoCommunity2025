@@ -1,0 +1,23 @@
+﻿@model PhotoCommunity2025.Models.User
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<h2>Вход</h2>
+
+<form method="post">
+    <div>
+        <label asp-for="Login">Логин:</label>
+        <input asp-for="Login" required />
+        <span asp-validation-for="Login" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Password">Пароль:</label>
+        <input asp-for="Password" type="password" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit">Войти</button>
+    </div>
+</form>

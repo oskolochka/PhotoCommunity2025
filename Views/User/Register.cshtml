@@ -19,7 +19,7 @@
     </div>
     <div>
         <label asp-for="MiddleName">Отчество:</label>
-        <input asp-for="MiddleName" />
+        <input asp-for="MiddleName" required />
         <span asp-validation-for="MiddleName" class="text-danger"></span>
     </div>
     <div>
@@ -46,10 +46,3 @@
         <button type="submit">Зарегистрироваться</button>
     </div>
 </form>
-
-@if (!ViewData.ModelState.IsValid)
-{
-    <div>
-        <span style="color:red;">@ViewData.ModelState.Values.First().Errors.First().ErrorMessage</span>
-    </div>
-}
