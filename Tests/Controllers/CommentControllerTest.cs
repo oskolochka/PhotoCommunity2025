@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using PhotoCommunity2025.Controllers;
 using PhotoCommunity2025.Models;
-using PhotoCommunityWeb.Services;
+using PhotoCommunity2025.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 

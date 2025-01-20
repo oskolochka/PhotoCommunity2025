@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PhotoCommunity2025.Models;
-using PhotoCommunityWeb.Services;
+using PhotoCommunity2025.Services;
 
 namespace PhotoCommunity2025.Controllers
 {
