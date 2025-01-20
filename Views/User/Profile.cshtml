@@ -1,0 +1,32 @@
+﻿@model PhotoCommunity2025.Models.User
+
+@{
+    ViewData["Title"] = "Профиль";
+}
+
+<h2>Профиль пользователя</h2>
+
+<div>
+    <h3>Информация о пользователе</h3>
+    <p><strong>Имя:</strong> @Model.FirstName</p>
+    <p><strong>Фамилия:</strong> @Model.LastName</p>
+    <p><strong>Отчество:</strong> @Model.MiddleName</p>
+    <p><strong>Логин:</strong> @Model.Login</p>
+    <p><strong>Список камер:</strong> @Model.Cameras</p>
+    <p><strong>Список объективов:</strong> @Model.Lenses</p>
+</div>
+
+<h3>Фотографии пользователя</h3>
+<div class="photo-gallery">
+    @for (int i = 0; i < Math.Min(Model.Photos.Count, 10); i++)
+    {
+        <div class="photo-item">
+            <img src="@Model.Photos[i].FilePath" alt="Фото @i" style="max-width: 150px; max-height: 150px;" />
+        </div>
+    }
+</div>
+
+<div>
+    <a asp-action="EditProfile" asp-route-userId="@Model.UserId" class="btn btn-primary">Редактировать профиль</a>
+</div>
+

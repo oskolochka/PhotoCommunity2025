@@ -19,6 +19,6 @@ namespace PhotoCommunity2025.Models
 
         public required string Lenses { get; set; }
 
-        public virtual ICollection<Photo> Photos { get; set; } = new List<Photo>();
+        public virtual List<Photo> Photos { get; set; } = new List<Photo>();
     }
 }
