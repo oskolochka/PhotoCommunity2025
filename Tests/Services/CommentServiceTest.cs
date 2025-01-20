@@ -35,8 +35,6 @@ namespace PhotoCommunityWeb.Tests.Services
         {
             var comment = new Comment { PhotoId = 1, UserId = 1, CommentText = "" };
 
-            _commentService.AddComment(comment);
-
             var ex = Assert.Throws<ArgumentException>(() => _commentService.AddComment(comment));
             Assert.That(ex.Message, Is.EqualTo("Текст комментария не может быть пустым"));
         }
@@ -63,7 +61,7 @@ namespace PhotoCommunityWeb.Tests.Services
 
             var comments = _commentService.GetCommentsByPhotoId(1);
 
-            Assert.That(comments, Is.Null);
+            Assert.That(comments, Is.Empty);
         }
 
         [Test]
