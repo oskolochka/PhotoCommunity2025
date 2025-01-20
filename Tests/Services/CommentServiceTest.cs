@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
 using PhotoCommunity2025.Models;
 using PhotoCommunity2025.Services;
-using PhotoCommunityWeb.Services;
-using System;
 
 
-namespace PhotoCommunityWeb.Tests.Services
+namespace PhotoCommunity2025.Tests.Services
 {
     [TestFixture]
     public class CommentServiceTests

@@ -1,6 +1,6 @@
 ﻿using PhotoCommunity2025.Models;
 
-namespace PhotoCommunityWeb.Services
+namespace PhotoCommunity2025.Services
 {
     public interface ICommentService
     {
