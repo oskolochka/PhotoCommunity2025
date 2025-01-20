@@ -1,7 +1,14 @@
+using PhotoCommunity2025.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Регистрация IUserService и его реализации UserService
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 var app = builder.Build();
 

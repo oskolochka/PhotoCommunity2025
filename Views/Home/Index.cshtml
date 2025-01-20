@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница - Photo Community</title>
+    <link rel="stylesheet" href="~/css/styles.css" /> <!-- Подключите ваш CSS -->
 </head>
 <body>
 
     <main>
         <h1>Добро пожаловать в фотосообщество!</h1>
         <p>Здесь вы можете делиться своими фотографиями и общаться с другими фотолюбителями.</p>
+        <a asp-controller="User" asp-action="Register" class="btn">Зарегистрироваться</a> |
+        <a asp-controller="User" asp-action="Login" class="btn">Войти</a>
     </main>
 
 </body>

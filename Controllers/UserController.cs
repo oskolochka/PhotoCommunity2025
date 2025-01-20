@@ -14,6 +14,11 @@ namespace PhotoCommunity2025.Controllers
             _userService = userService;
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Register(User user)
         {
