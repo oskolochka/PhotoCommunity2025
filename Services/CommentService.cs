@@ -1,36 +1,48 @@
-﻿using PhotoCommunity2025.Models;
-
+﻿using Microsoft.EntityFrameworkCore;
+using PhotoCommunity2025.Data;
+using PhotoCommunity2025.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PhotoCommunity2025.Services
 {
     public class CommentService : ICommentService
     {
-        private readonly List<Comment> _comments = new List<Comment>();
-        private int _nextId = 1;
+        private readonly AppDbContext _context;
 
-        public void AddComment(Comment comment)
+        public CommentService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task AddCommentAsync(Comment comment)
         {
             if (string.IsNullOrWhiteSpace(comment.CommentText))
             {
                 throw new ArgumentException("Текст комментария не может быть пустым");
             }
 
-            comment.CommentId = _nextId++;
-            _comments.Add(comment);
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync(); // Сохранение изменений в БД
         }
 
-        public void DeleteComment(int id)
+        public async Task DeleteCommentAsync(int id)
         {
-            var comment = _comments.FirstOrDefault(c => c.CommentId == id);
+            var comment = await _context.Comments.FindAsync(id);
             if (comment != null)
             {
-                _comments.Remove(comment);
+                _context.Comments.Remove(comment); // Удаление комментария
+                await _context.SaveChangesAsync(); // Сохранение изменений в БД
             }
         }
 
-        public IEnumerable<Comment> GetCommentsByPhotoId(int photoId)
+        public async Task<IEnumerable<Comment>> GetCommentsByPhotoIdAsync(int photoId)
         {
-            return _comments.Where(c => c.PhotoId == photoId).ToList();
+            return await _context.Comments
+                .Where(c => c.PhotoId == photoId)
+                .ToListAsync(); // Получение комментариев по ID фотографии
         }
     }
 }

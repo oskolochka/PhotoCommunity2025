@@ -18,7 +18,7 @@ namespace PhotoCommunity2025.Controllers
         {
             try
             {
-                _commentService.AddComment(comment);
+                _commentService.AddCommentAsync(comment);
                 return RedirectToAction("PhotoDetails", "Photo", new { id = comment.PhotoId });
             }
             catch (ArgumentException ex)
@@ -31,14 +31,14 @@ namespace PhotoCommunity2025.Controllers
         [HttpPost]
         public IActionResult DeleteComment(int id, int photoId)
         {
-            _commentService.DeleteComment(id);
+            _commentService.DeleteCommentAsync(id);
             return RedirectToAction("PhotoDetails", "Photo", new { id = photoId });
         }
 
         [HttpGet]
         public IActionResult GetComments(int photoId)
         {
-            var comments = _commentService.GetCommentsByPhotoId(photoId);
+            var comments = _commentService.GetCommentsByPhotoIdAsync(photoId);
             return View(comments);
         }
     }

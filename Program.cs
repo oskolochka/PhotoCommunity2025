@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using PhotoCommunity2025.Data;
 using PhotoCommunity2025.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

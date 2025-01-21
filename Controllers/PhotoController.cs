@@ -24,7 +24,7 @@ namespace PhotoCommunity2025.Controllers
         {
             try
             {
-                _photoService.UploadPhoto(photo);
+                _photoService.UploadPhotoAsync(photo);
                 return RedirectToAction("Profile", new { userId = photo.UserId }); 
             }
             catch (ArgumentException ex)
@@ -37,7 +37,7 @@ namespace PhotoCommunity2025.Controllers
         [HttpGet]
         public IActionResult PhotoDetails(int id)
         {
-            var photo = _photoService.GetPhotoById(id);
+            var photo = _photoService.GetPhotoByIdAsync(id);
             if (photo == null)
             {
                 return NotFound();
@@ -49,7 +49,7 @@ namespace PhotoCommunity2025.Controllers
         [HttpGet]
         public IActionResult DeletePhoto(int id)
         {
-            _photoService.DeletePhoto(id);
+            _photoService.DeletePhotoAsync(id);
             return RedirectToAction("Profile");
         }
 
@@ -57,14 +57,14 @@ namespace PhotoCommunity2025.Controllers
         [HttpGet]
         public IActionResult Search(string title)
         {
-            var photos = _photoService.SearchPhotos(title);
+            var photos = _photoService.SearchPhotosAsync(title);
             return View(photos);
         }
 
         [HttpGet]
         public IActionResult UserPhotos(int userId)
         {
-            var photos = _photoService.GetUserPhotos(userId);
+            var photos = _photoService.GetUserPhotosAsync(userId);
             return View(photos);
         }
     }

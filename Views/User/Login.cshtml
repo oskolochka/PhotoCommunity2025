@@ -21,3 +21,11 @@
         <button type="submit">Войти</button>
     </div>
 </form>
+
+<!-- Добавление секции для отображения ошибок -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="text-danger">
+        <strong>Ошибка входа:</strong> Неверный логин или пароль.
+    </div>
+}

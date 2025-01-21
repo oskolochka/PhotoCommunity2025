@@ -1,22 +1,19 @@
 ﻿
-namespace PhotoCommunity2025.Models
+using PhotoCommunity2025.Models;
+
+public class Photo
 {
-    public class Photo
-    {
-        public int PhotoId { get; set; }
+    public int PhotoId { get; set; } // Автоинкрементный первичный ключ
+    public int UserId { get; set; } // Внешний ключ
+    public string Title { get; set; } // Заголовок
+    public string Description { get; set; } // Описание
+    public string Tags { get; set; } // Теги
+    public string FilePath { get; set; } // Путь к файлу
 
-        public int UserId { get; set; }
+    // Связь с пользователем
+    public virtual User User { get; set; } // Навигационное свойство
 
-        public required string Title { get; set; }
+    // Связь с комментариями
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-        public string? Description { get; set; }
-
-        public string? Tags { get; set; }
-
-        public required string FilePath { get; set; }
-
-        public virtual User User { get; set; }
-
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-    }
 }
