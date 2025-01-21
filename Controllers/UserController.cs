@@ -24,12 +24,6 @@ namespace PhotoCommunity2025.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {
-            // Проверяем модель на валидность
-            if (!TryValidateModel(user))
-            {
-                return View(user); // Если модель не валидна, возвращаем представление с ошибками
-            }
-
             try
             {
                 await _userService.RegisterAsync(user);
@@ -37,7 +31,20 @@ namespace PhotoCommunity2025.Controllers
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                // Проверяем, какое сообщение об ошибке было выброшено и добавляем его в соответствующее поле
+                if (ex.Message == "Все поля должны быть заполнены")
+                {
+                    ModelState.AddModelError("", "Все поля должны быть заполнены");
+                }
+                else if (ex.Message == "Пароль должен состоять минимум из 8 символов")
+                {
+                    ModelState.AddModelError("", "Пароль должен состоять минимум из 8 символов");
+                }
+                else if (ex.Message == "Этот логин уже занят")
+                {
+                    ModelState.AddModelError("", "Этот логин уже занят");
+                }
+
                 return View(user);
             }
         }

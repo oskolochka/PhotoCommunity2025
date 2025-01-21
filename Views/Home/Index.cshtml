@@ -4,15 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница - Photo Community</title>
-    <link rel="stylesheet" href="~/css/styles.css" /> <!-- Подключите ваш CSS -->
+    <link rel="stylesheet" href="~/css/site.css" /> 
 </head>
 <body>
 
-    <main>
-        <h1>Добро пожаловать в фотосообщество!</h1>
-        <p>Здесь вы можете делиться своими фотографиями и общаться с другими фотолюбителями.</p>
-        <a asp-controller="User" asp-action="Register" class="btn">Зарегистрироваться</a> |
-        <a asp-controller="User" asp-action="Login" class="btn">Войти</a>
+    <main class="container">
+        <h2>Добро пожаловать в фотосообщество!</h2>
+        <div class="button-container text-center">
+            <form action="/User/Register" method="get">
+                <button type="submit" class="btn">Зарегистрироваться</button>
+            </form>
+
+            <form action="/User/Login" method="get">
+                <button type="submit" class="btn">Войти</button>
+            </form>
     </main>
 
 </body>

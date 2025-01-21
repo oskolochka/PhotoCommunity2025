@@ -1,19 +1,17 @@
-﻿
-using PhotoCommunity2025.Models;
+﻿using PhotoCommunity2025.Models;
+
 
 public class Photo
 {
-    public int PhotoId { get; set; } // Автоинкрементный первичный ключ
-    public int UserId { get; set; } // Внешний ключ
-    public string Title { get; set; } // Заголовок
-    public string Description { get; set; } // Описание
-    public string Tags { get; set; } // Теги
-    public string FilePath { get; set; } // Путь к файлу
+    public int PhotoId { get; set; } 
+    public int UserId { get; set; } 
+    public string Title { get; set; } 
+    public string Description { get; set; } 
+    public string Tags { get; set; } 
+    public string FilePath { get; set; }
 
-    // Связь с пользователем
-    public virtual User User { get; set; } // Навигационное свойство
+    public virtual User User { get; set; } 
 
-    // Связь с комментариями
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
 }

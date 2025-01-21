@@ -4,28 +4,38 @@
     ViewData["Title"] = "Вход";
 }
 
-<h2>Вход</h2>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" /> 
+</head>
+<body>
+    <div class="container">
+        <h2>Вход</h2>
 
-<form method="post">
-    <div>
-        <label asp-for="Login">Логин:</label>
-        <input asp-for="Login" required />
-        <span asp-validation-for="Login" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Password">Пароль:</label>
-        <input asp-for="Password" type="password" required />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div>
-        <button type="submit">Войти</button>
-    </div>
-</form>
+        <form method="post" class="login-form">
+            <div class="form-group">
+                <label asp-for="Login">Логин:</label>
+                <input asp-for="Login" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Пароль:</label>
+                <input asp-for="Password" type="password" class="form-control" required />
+            </div>
+            <div>
+                <button type="submit" class="btn">Войти</button>
+            </div>
+        </form>
 
-<!-- Добавление секции для отображения ошибок -->
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="text-danger">
-        <strong>Ошибка входа:</strong> Неверный логин или пароль.
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="text-danger">
+                Неверный логин или пароль
+            </div>
+        }
     </div>
-}
+</body>
+</html>
