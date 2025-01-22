@@ -31,7 +31,6 @@ namespace PhotoCommunity2025.Controllers
             }
             catch (ArgumentException ex)
             {
-                // Проверяем, какое сообщение об ошибке было выброшено и добавляем его в соответствующее поле
                 if (ex.Message == "Все поля должны быть заполнены")
                 {
                     ModelState.AddModelError("", "Все поля должны быть заполнены");
@@ -70,7 +69,12 @@ namespace PhotoCommunity2025.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile(string username)
         {
-            // Получаем пользователя по логину
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return NotFound();
+            }
+
             var user = await _userService.GetUserByUsernameAsync(username);
             if (user == null)
             {
@@ -82,7 +86,7 @@ namespace PhotoCommunity2025.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProfile(string username)
         {
-            // Получаем пользователя по логину
+       
             var user = await _userService.GetUserByUsernameAsync(username);
             if (user == null)
             {
@@ -94,13 +98,8 @@ namespace PhotoCommunity2025.Controllers
         [HttpPost]
         public async Task<IActionResult> EditProfile(User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return NotFound(); ; // Если модель не валидна, возвращаем представление с ошибками
-            }
-
             await _userService.UpdateUserAsync(user);
-            return RedirectToAction("Profile", new { username = user.Login }); // Перенаправляем на профиль
+            return View(user);
         }
 
         [HttpPost]

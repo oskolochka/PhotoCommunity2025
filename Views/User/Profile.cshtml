@@ -4,12 +4,19 @@
     ViewData["Title"] = "Профиль пользователя";
 }
 
-<link rel="stylesheet" type="text/css" href="~/Style/Styles1.css" /> 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Профиль пользователя</h2>
 
-<div class="main-container">
-    <div class="info-actions-container">
-        <div class="container">
-            <h2>Профиль пользователя</h2>
+        <div class="user-info">
             <p><strong>Имя:</strong> @Model.FirstName</p>
             <p><strong>Фамилия:</strong> @Model.LastName</p>
             <p><strong>Отчество:</strong> @Model.MiddleName</p>
@@ -17,33 +24,13 @@
             <p><strong>Список камер:</strong> @Model.Cameras</p>
             <p><strong>Список объективов:</strong> @Model.Lenses</p>
         </div>
-        <div class="container">
-            <h2>Действия</h2>
+
+        <div class="user-actions">
+            <h3>Действия</h3>
             <a asp-action="EditProfile" asp-route-username="@Model.Login" class="btn">Редактировать профиль</a>
             <a asp-action="SearchPhotos" class="btn">Поиск фотографий</a><br />
             <a asp-action="UploadPhoto" class="btn">Загрузить фотографию</a><br />
         </div>
     </div>
-    <div class="photo-container">
-        <h2>Фотографии</h2>
-        <div class="photo-grid">
-            @if (Model.Photos != null && Model.Photos.Any())
-            {
-                foreach (var photo in Model.Photos)
-                {
-                    <div class="photo-item">
-                        <img src="~/Uploads/@photo.FilePath" alt="Фото" width="300" height="300" />
-                        <div class="photo-actions">
-                            <a asp-action="View" asp-route-id="@photo.PhotoId" class="action-button">Просмотреть</a>
-                            <a asp-action="Delete" asp-route-id="@photo.PhotoId" class="action-button">Удалить</a>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>Нет фотографий для отображения.</p>
-            }
-        </div>
-    </div>
-</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿using PhotoCommunity2025.Models;
 using Microsoft.EntityFrameworkCore;
-using PhotoCommunity2025.Data; // Добавьте пространство имен для контекста
+using PhotoCommunity2025.Data; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +10,21 @@ namespace PhotoCommunity2025.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppDbContext _context; // Контекст базы данных
+        private readonly AppDbContext _context; 
 
         public UserService(AppDbContext context)
         {
-            _context = context; // Инициализация контекста
+            _context = context; 
         }
 
         public async Task RegisterAsync(User user)
         {
-            // Проверка на существование логина
+
             if (await _context.Users.AnyAsync(u => u.Login == user.Login))
             {
                 throw new ArgumentException("Этот логин уже занят");
             }
 
-            // Валидация полей пользователя
             if (string.IsNullOrWhiteSpace(user.LastName) ||
                 string.IsNullOrWhiteSpace(user.FirstName) ||
                 string.IsNullOrWhiteSpace(user.MiddleName) ||
@@ -42,21 +41,19 @@ namespace PhotoCommunity2025.Services
                 throw new ArgumentException("Пароль должен состоять минимум из 8 символов");
             }
 
-            // Сохранение пароля в открытом виде
-            // Добавление пользователя в контекст
+   
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync(); // Сохранение изменений в БД
+            await _context.SaveChangesAsync();
         }
 
         public async Task<User> LoginAsync(string login, string password)
         {
-            // Поиск пользователя по логину и паролю
             return await _context.Users.FirstOrDefaultAsync(u => u.Login == login && u.Password == password);
         }
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await _context.Users.FindAsync(id); // Поиск пользователя по ID
+            return await _context.Users.FindAsync(id); 
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)
@@ -66,11 +63,10 @@ namespace PhotoCommunity2025.Services
 
         public async Task UpdateUserAsync(User user)
         {
-            // Проверка на заполненность всех полей
+
             if (string.IsNullOrWhiteSpace(user.LastName) ||
                 string.IsNullOrWhiteSpace(user.FirstName) ||
                 string.IsNullOrWhiteSpace(user.MiddleName) ||
-                string.IsNullOrWhiteSpace(user.Login) ||
                 string.IsNullOrWhiteSpace(user.Cameras) ||
                 string.IsNullOrWhiteSpace(user.Lenses))
             {
@@ -80,16 +76,13 @@ namespace PhotoCommunity2025.Services
             var existingUser = await GetUserByIdAsync(user.UserId);
             if (existingUser != null)
             {
-                // Обновляем все поля
                 existingUser.LastName = user.LastName;
                 existingUser.FirstName = user.FirstName;
                 existingUser.MiddleName = user.MiddleName;
-                existingUser.Login = user.Login;
-                existingUser.Password = existingUser.Password;
                 existingUser.Cameras = user.Cameras;
                 existingUser.Lenses = user.Lenses;
 
-                await _context.SaveChangesAsync(); // Сохраняем изменения в БД
+                await _context.SaveChangesAsync(); 
             }
         }
 
@@ -98,14 +91,14 @@ namespace PhotoCommunity2025.Services
             var user = await GetUserByIdAsync(id);
             if (user != null)
             {
-                _context.Users.Remove(user); // Удаление пользователя
-                await _context.SaveChangesAsync(); // Сохранение изменений в БД
+                _context.Users.Remove(user); 
+                await _context.SaveChangesAsync(); 
             }
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            return await _context.Users.ToListAsync(); // Получение всех пользователей из БД
+            return await _context.Users.ToListAsync(); 
         }
     }
 }
